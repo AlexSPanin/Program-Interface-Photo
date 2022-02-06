@@ -20,15 +20,18 @@ class MainViewController: UIViewController {
     var imagePhotoPicker = UIImagePickerController()
     var imageScroll = ImageScrollView()
     var photoImage: UIImage = {
-        if let imagePath = Bundle.main.path(forResource: "DSC", ofType: "JPG")
-        {
-            if let photo = UIImage(contentsOfFile: imagePath) { return photo }
-        }
-        return UIImage()
+        let image = UIImage(systemName: "person.fill.questionmark") ?? UIImage()
+        return image
     }()
     
+    private let widthPhoto: CGFloat = 180
+    private let heigthPhoto: CGFloat = 240
+    
+    private let widthButton: CGFloat = 40
+    private let heigthButton: CGFloat = 35
+    
     // создали кнопки
-    let libraryButton: UIButton = {
+    private let libraryButton: UIButton = {
         let button = UIButton()
         button.tintColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
         button.setBackgroundImage(UIImage(systemName: "photo"), for: .normal)
@@ -36,7 +39,7 @@ class MainViewController: UIViewController {
         return button
     }()
     
-    let photoButton: UIButton = {
+    private let photoButton: UIButton = {
         let button = UIButton()
         button.tintColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
         button.setBackgroundImage(UIImage(systemName: "camera"), for: .normal)
@@ -44,7 +47,7 @@ class MainViewController: UIViewController {
         return button
     }()
     
-    let shareButton: UIButton = {
+    private let shareButton: UIButton = {
         let button = UIButton()
         button.tintColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
         button.setBackgroundImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
@@ -52,7 +55,7 @@ class MainViewController: UIViewController {
         return button
     }()
     
-    let rotateRigthButton: UIButton = {
+    private let rotateRigthButton: UIButton = {
         let button = UIButton()
         button.tintColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
         button.setBackgroundImage(UIImage(systemName: "rotate.right"), for: .normal)
@@ -60,20 +63,13 @@ class MainViewController: UIViewController {
         return button
     }()
     
-    let rotateLeftButton: UIButton = {
+    private let rotateLeftButton: UIButton = {
         let button = UIButton()
         button.tintColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
         button.setBackgroundImage(UIImage(systemName: "rotate.left"), for: .normal)
         button.addTarget(self, action: #selector(rotatedLeft), for: .touchDown)
         return button
     }()
-    
-    
-    private let widthPhoto: CGFloat = 180
-    private let heigthPhoto: CGFloat = 240
-    
-    private let widthButton: CGFloat = 40
-    private let heigthButton: CGFloat = 35
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,11 +97,14 @@ class MainViewController: UIViewController {
     }
     
     @objc func sharePhoto() {
-        let shareImage = self.imageScroll.getImage(image: photoImage)
+        let shareImage = self.imageScroll.getImage()
         let shareController = UIActivityViewController(activityItems: [shareImage], applicationActivities: nil)
-        shareController.completionWithItemsHandler = { _, bool, _, _ in
-            if bool { print("Yes")}
-        }
+        
+        /* для обработки сообщений после работы контроллера
+         shareController.completionWithItemsHandler = { _, bool, _, _ in
+         if bool { print("Yes")}
+         }
+         */
         present(shareController, animated: true, completion: nil)
     }
     
@@ -125,16 +124,13 @@ class MainViewController: UIViewController {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         // проверка какое фото используем, редактируемое или оригинальное
         if let image = info[.editedImage] as? UIImage {
-            photoImage = image
+            imageFilter(image)
         } else {
             guard  let image = info[.originalImage] as? UIImage else { return }
-            photoImage = image
+            imageFilter(image)
         }
-        // наложение фильтра
-        imageFilter(photoImage)
         // выключение встроенного вью контроллера
         imagePhotoPicker.dismiss(animated: true, completion: nil)
-        
         self.imageScroll.set(image: photoImage)
     }
     
@@ -199,13 +195,17 @@ class MainViewController: UIViewController {
     
     // MARK: - устанавливаем констрейнты для ImageScrollView
     private func setupImageScrollView(width:CGFloat, heigth: CGFloat) {
-        imageScroll.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         imageScroll = ImageScrollView(frame: CGRect(
             x: (view.bounds.width - width) / 2,
             y: (view.bounds.height - heigth) / 2,
             width: width,
             height: heigth))
         view.addSubview(imageScroll)
+        // установка фона ширины рамки и цвета фона
+        imageScroll.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        imageScroll.layer.borderWidth = 1.0
+        imageScroll.layer.borderColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+        imageScroll.layer.cornerRadius = 15
         // разрешили использовать констрейнты
         imageScroll.translatesAutoresizingMaskIntoConstraints = false
         // привязали к границам view
@@ -220,35 +220,31 @@ extension MainViewController: UINavigationControllerDelegate, UIImagePickerContr
     
     // MARK: - получение изображения в зависимости от типа
     private func fetchImage(_ type: TypeSource) {
-        imagePhotoPicker.allowsEditing = false // разрешение редактирования встроенными методами
         imagePhotoPicker.modalPresentationStyle = .pageSheet // вид представления встроенных инструментов
         
         switch type {
         case .camera:
+            imagePhotoPicker.allowsEditing = true // разрешение редактирования встроенными методами
             imagePhotoPicker.sourceType = .camera
             imagePhotoPicker.cameraDevice = .front
         case .gallary:
+            imagePhotoPicker.allowsEditing = false // разрешение редактирования встроенными методами
             imagePhotoPicker.sourceType = .photoLibrary // указываем что используем
         }
-        
         present(imagePhotoPicker, animated: true, completion: nil) // запуск контроллера
     }
     
     // MARK: - применение фильтра и вывод изображения во вью
     private func imageFilter(_ image: UIImage) {
-        let orientation = image.imageOrientation
-        let scale = image.scale
         let context = CIContext(options: nil)
         let inputImage = CIImage(image: image)
-        
         let currentFilter = CIFilter(name: "CIPhotoEffectMono")
         currentFilter?.setDefaults()
         currentFilter?.setValue(inputImage, forKey: kCIInputImageKey) // ключ определяет определяет входное изображение
         //      currentFilter.setValue(0.9, forKey: kCIInputIntensityKey) - ключ определяет интенсивность фильта, для Монохрома не нужен
         if let output = currentFilter?.outputImage {
             if let cgImage = context.createCGImage(output, from: output.extent) {
-                let uiImage = UIImage(cgImage: cgImage, scale: scale, orientation: orientation)
-                photoImage = uiImage
+                  photoImage = UIImage(cgImage: cgImage)
             }
         }
     }

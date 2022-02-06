@@ -46,7 +46,9 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         
         // инициализируем объект нашим изображением
         imageZoomView = UIImageView(image: image)
+        imageZoomView?.tintColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
         
+
         // после проверки опционала добавляем наше subview
         guard let imageZoomView = imageZoomView else { return }
         
@@ -56,8 +58,8 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         configurate(imageSize: image.size)
     }
     // MARK: - Обрезка изображения
-    func getImage(image: UIImage) -> UIImage {
-        
+    func getImage() -> UIImage {
+        guard let image = imageZoomView?.image else { return UIImage() }
         let width: CGFloat = bounds.width / zoomScale
         let height: CGFloat = bounds.height / zoomScale
         let x = bounds.origin.x / zoomScale
