@@ -60,17 +60,73 @@
 		E24A8A4227AD5707008B297E /* Program Interface */ = {
 			isa = PBXGroup;
 			children = (
-				E24A8A4727AD5707008B297E /* MainViewController.swift */,
-				E24A8A5727AD57A5008B297E /* ImageScrollView.swift */,
-				E24A8A4327AD5707008B297E /* AppDelegate.swift */,
-				E24A8A4527AD5707008B297E /* SceneDelegate.swift */,
-				E24A8A4927AD5707008B297E /* Main.storyboard */,
-				E24A8A4C27AD5708008B297E /* Assets.xcassets */,
-				E24A8A4E27AD5708008B297E /* LaunchScreen.storyboard */,
-				E24A8A5127AD5708008B297E /* Info.plist */,
-				E27FE18C27B12F1B00B8C85E /* ExtensionUIImage .swift */,
+				E27FE18E27B133EC00B8C85E /* ViewControllers */,
+				E27FE19127B1344200B8C85E /* View */,
+				E27FE19427B1349500B8C85E /* Extensions */,
+				E27FE19327B1348600B8C85E /* Servises */,
+				E27FE19227B1344800B8C85E /* SupportingFiles */,
+				E27FE19027B1342300B8C85E /* Resourses */,
+				E27FE18F27B1341100B8C85E /* Storyboards */,
 			);
 			path = "Program Interface";
+			sourceTree = "<group>";
+		};
+		E27FE18E27B133EC00B8C85E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E24A8A4727AD5707008B297E /* MainViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		E27FE18F27B1341100B8C85E /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				E24A8A4E27AD5708008B297E /* LaunchScreen.storyboard */,
+				E24A8A4927AD5707008B297E /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		E27FE19027B1342300B8C85E /* Resourses */ = {
+			isa = PBXGroup;
+			children = (
+				E24A8A4C27AD5708008B297E /* Assets.xcassets */,
+			);
+			path = Resourses;
+			sourceTree = "<group>";
+		};
+		E27FE19127B1344200B8C85E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E24A8A5727AD57A5008B297E /* ImageScrollView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E27FE19227B1344800B8C85E /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				E24A8A4327AD5707008B297E /* AppDelegate.swift */,
+				E24A8A4527AD5707008B297E /* SceneDelegate.swift */,
+				E24A8A5127AD5708008B297E /* Info.plist */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		E27FE19327B1348600B8C85E /* Servises */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Servises;
+			sourceTree = "<group>";
+		};
+		E27FE19427B1349500B8C85E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E27FE18C27B12F1B00B8C85E /* ExtensionUIImage .swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -299,7 +355,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QD5349NP78;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Program Interface/Info.plist";
+				INFOPLIST_FILE = "Program Interface/SupportingFiles/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -327,7 +383,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QD5349NP78;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Program Interface/Info.plist";
+				INFOPLIST_FILE = "Program Interface/SupportingFiles/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
