@@ -23,7 +23,8 @@ class MainViewController: UIViewController {
         let image = UIImage(systemName: "person.fill.questionmark") ?? UIImage()
         return image
     }()
-    
+    private let xToCenterPhoto: CGFloat = 0
+    private let yToCenterPhoto: CGFloat = 0
     private let widthPhoto: CGFloat = 180
     private let heigthPhoto: CGFloat = 240
     
@@ -211,8 +212,8 @@ class MainViewController: UIViewController {
         // привязали к границам view
         imageScroll.heightAnchor.constraint(equalToConstant: heigth).isActive = true
         imageScroll.widthAnchor.constraint(equalToConstant: width).isActive = true
-        imageScroll.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        imageScroll.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        imageScroll.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: yToCenterPhoto).isActive = true
+        imageScroll.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: xToCenterPhoto).isActive = true
     }
 }
 
