@@ -23,13 +23,19 @@ class MainViewController: UIViewController {
         let image = UIImage(systemName: "person.fill.questionmark") ?? UIImage()
         return image
     }()
+    // параметры установки окна
     private let xToCenterPhoto: CGFloat = 0
-    private let yToCenterPhoto: CGFloat = 0
-    private let widthPhoto: CGFloat = 180
-    private let heigthPhoto: CGFloat = 240
+    private let yToCenterPhoto: CGFloat = -30
+    private let widthPhoto: CGFloat = 120
+    private let heigthPhoto: CGFloat = 160
     
-    private let widthButton: CGFloat = 40
-    private let heigthButton: CGFloat = 35
+    // рассчитываем размер кнопок
+    private lazy var widthButton: CGFloat = {
+        widthPhoto / 4
+    }()
+    private lazy var heigthButton: CGFloat = {
+        widthButton * 3 / 4
+    }()
     
     // создали кнопки
     private let libraryButton: UIButton = {
