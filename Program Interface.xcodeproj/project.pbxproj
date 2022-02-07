@@ -14,6 +14,7 @@
 		E24A8A4D27AD5708008B297E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E24A8A4C27AD5708008B297E /* Assets.xcassets */; };
 		E24A8A5027AD5708008B297E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E24A8A4E27AD5708008B297E /* LaunchScreen.storyboard */; };
 		E24A8A5827AD57A5008B297E /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24A8A5727AD57A5008B297E /* ImageScrollView.swift */; };
+		E27FE18D27B12F1B00B8C85E /* ExtensionUIImage .swift in Sources */ = {isa = PBXBuildFile; fileRef = E27FE18C27B12F1B00B8C85E /* ExtensionUIImage .swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		E24A8A4F27AD5708008B297E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E24A8A5127AD5708008B297E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E24A8A5727AD57A5008B297E /* ImageScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
+		E27FE18C27B12F1B00B8C85E /* ExtensionUIImage .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExtensionUIImage .swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				E24A8A4C27AD5708008B297E /* Assets.xcassets */,
 				E24A8A4E27AD5708008B297E /* LaunchScreen.storyboard */,
 				E24A8A5127AD5708008B297E /* Info.plist */,
+				E27FE18C27B12F1B00B8C85E /* ExtensionUIImage .swift */,
 			);
 			path = "Program Interface";
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E27FE18D27B12F1B00B8C85E /* ExtensionUIImage .swift in Sources */,
 				E24A8A4827AD5707008B297E /* MainViewController.swift in Sources */,
 				E24A8A5827AD57A5008B297E /* ImageScrollView.swift in Sources */,
 				E24A8A4427AD5707008B297E /* AppDelegate.swift in Sources */,
